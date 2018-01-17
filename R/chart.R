@@ -16,19 +16,39 @@
 #   - bundle "forceFit" into "width", forceFit is false by default
 #   -
 
-chart <- function(data, width, height, pixelRatio = NULL, animate = TRUE) {
+#' Create a G2 chart
+#'
+#' A chart.
+#'
+#' @param data A data frame.
+#'
+#' @param width The width of the chart in pixels.
+#'
+#' @param height The height of the chart in pixels
+#'
+#' @export
+#' @examples
+#' games %>%
+#'   chart() %>%
+#'   interval(
+#'     . %>%
+#'       position("genre*sold") %>%
+#'       color("genre")
+#'   )
+#'
+chart <- function(data, width = 600, height = 300) {
   structure(
     list(
       data = data,
       container = NULL,
       width = width,
       height = height,
-      pixelRatio = pixelRatio,
-      animate = animate,
+      pixelRatio = NULL,
       background = list(),
       plotBackground = list(),
       forceFit = FALSE,  # i.e. width is required, there is also a chart method animate()
-      animate = TRUE     # there is also a chart method animate()
+      # animate = TRUE     # there is also a chart method animate()
+      geoms = list()
     ),
     class = "chart"
   )

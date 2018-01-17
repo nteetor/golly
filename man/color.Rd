@@ -4,10 +4,12 @@
 \alias{color}
 \title{Geom color}
 \usage{
-color(geom, value)
+color(geom, field, value = NULL)
 }
 \arguments{
 \item{geom}{A geom object, e.g. a call to \link{line}, \link{point}, etc.}
+
+\item{field}{A character string specifying a data field.}
 
 \item{value}{A character string (color name or hexcode), a gradiant specified
 as \code{"color1-color2"}, an unnamed vector of colors to use, or a named vector
@@ -17,4 +19,9 @@ one).}
 }
 \description{
 Describe a colors for fields.
+}
+\seealso{
+Other geom methods: \code{\link{adjust}},
+  \code{\link{opacity}}, \code{\link{position}},
+  \code{\link{shape}}, \code{\link{size}}
 }

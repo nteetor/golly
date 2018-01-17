@@ -4,14 +4,13 @@
 \alias{position}
 \title{Geom position}
 \usage{
-position(geom, x, y)
+position(geom, value)
 }
 \arguments{
 \item{geom}{A geom object, e.g. a call to \link{line}, \link{point}, etc.}
 
-\item{x}{The field on the x-axis.}
-
-\item{y}{The field on the y-axis.}
+\item{value}{A character string specifying an interaction of fields or
+a character vector specifying an interaction of fields.}
 }
 \description{
 Describe how fields interact.
@@ -22,4 +21,8 @@ notation.
 }
 \seealso{
 \link{https://antv.alipay.com/zh-cn/g2/3.x/api/geom.html#_position}
+
+Other geom methods: \code{\link{adjust}},
+  \code{\link{color}}, \code{\link{opacity}},
+  \code{\link{shape}}, \code{\link{size}}
 }

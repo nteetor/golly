@@ -7,5 +7,7 @@
 #'
 #' [https://github.com/antvis/g2]
 #'
+#' @importFrom jsonlite toJSON
+#'
 #' @name golly
 "_PACKAGE"
