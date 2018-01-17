@@ -1,6 +1,62 @@
+#' Print a chart object
+#'
+#' Print a chart object or coerce a chart to a set of tags or HTML string.
+#'
+#' @param x A chart object.
+#'
+#' @param ... Additional arguments passed on to other methods.
+#'
+#' @export
 print.chart <- function(x, ...) {
-  htmltools::html_print(format(x))
+  htmltools::html_print(as.tags(x))
   invisible(x)
+}
+
+#' @rdname print.chart
+#' @export
+as.character.chart <- function(x, ...) {
+  as.character(as.tags(x), ...)
+}
+
+#' @rdname print.chart
+#' @export
+as.tags.chart <- function(x, ...) {
+  if (is.null(x$container)) {
+    x$container <- "c1"
+  }
+
+  tagList(
+    tags$div(id = x$container),
+    tags$script(
+      HTML(
+        paste0(
+          format_data(x),
+          format_chart(x),
+          format_source(x),
+          format_geoms(x),
+          "chart.render();"
+        )
+      )
+    ),
+    g2Dependency()
+  )
+}
+
+#' Knit a chart
+#'
+#' Put a chart into a R markdown document.
+#'
+#' @param x A chart object.
+#'
+#' @param ... Additional arguments passed to other methods.
+#'
+#' @export
+knit_print.chart <- function(x, ...) {
+  deps <- resolveDependencies(findDependencies(x, TRUE), TRUE)
+  knitr::asis_output(
+    htmlPreserve(as.character(x)),
+    meta = if (length(deps)) list(deps)
+  )
 }
 
 format_data <- function(chart) {
@@ -72,27 +128,5 @@ format_geom <- function(geom) {
       )
     },
     ";"
-  )
-}
-
-format.chart <- function(x) {
-  if (is.null(x$container)) {
-    x$container <- "c1"
-  }
-
-  htmltools::tagList(
-    htmltools::tags$div(id = x$container),
-    htmltools::tags$script(
-      htmltools::HTML(
-        paste0(
-          format_data(x),
-          format_chart(x),
-          format_source(x),
-          format_geoms(x),
-          "chart.render();"
-        )
-      )
-    ),
-    includeG2()
   )
 }

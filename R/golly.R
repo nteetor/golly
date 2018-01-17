@@ -7,6 +7,7 @@
 #'
 #' [https://github.com/antvis/g2]
 #'
+#' @import htmltools
 #' @importFrom jsonlite toJSON
 #'
 #' @name golly
